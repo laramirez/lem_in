@@ -6,7 +6,7 @@
 /*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/22 12:21:19 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/09/18 16:59:43 by lararamirez      ###   ########.fr       */
+/*   Updated: 2017/09/25 19:23:59 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,16 @@ typedef struct	s_master
 /*
 ** Functions in lem_in.c
 */
-void	get_params(t_list *input, t_master *lem_in);
+t_list	*get_rooms(t_list *lst, t_master *lem_in);
 char	is_number(char *str);
 char	is_room(char *str);
 char	is_comment(char *str);
 char	is_command(char *str);
 char	is_tunnel(char *str);
 void	display_list(t_list *list);
+void    print_error_and_kill(char error_code);
+char	get_ant_count(char *data, t_master *lem_in);
+char	count_rooms(t_list *lst, t_master *lem_in);
+char	check_start_end(t_list *lst);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 16:02:13 by lramirez          #+#    #+#             */
-/*   Updated: 2017/09/15 15:29:49 by lararamirez      ###   ########.fr       */
+/*   Updated: 2017/09/25 18:06:11 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 
 typedef struct		s_list
 {
-	void			*content;
-	size_t			content_size;
+	void			*data;
+	size_t			data_size;
 	struct s_list	*next;
 }					t_list;
 
@@ -180,7 +180,7 @@ int					*ft_tabcpy(const int *tab, size_t size);
 /*
 ** ---LIST MANIPULATION---
 */
-t_list				*ft_lstnew(void const *content, size_t content_size);
+t_list				*ft_lstnew(void const *data, size_t data_size);
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstaddend(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));

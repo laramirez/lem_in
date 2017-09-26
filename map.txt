@@ -1,11 +1,12 @@
-3
+20
 room_1 5 0
 ##start
 room_2 1 2
 ##end
 room_3 9 2
-##end
 room_4 5 4
+cuou 8 7
+xhr 8 0
 0-2
 0-3
 0-2

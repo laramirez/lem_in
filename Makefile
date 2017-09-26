@@ -6,7 +6,7 @@
 #    By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/25 16:11:33 by lararamirez       #+#    #+#              #
-#    Updated: 2017/09/25 16:16:36 by lararamirez      ###   ########.fr        #
+#    Updated: 2017/09/25 19:01:21 by lararamirez      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,9 @@ INCLUDES = ./lem_in_dir/includes/lem_in.h
 SRC_DIR = ./lem_in_dir/sources/
 OBJ_DIR = ./lem_in_dir/objects/
 _OBJ =	main.o \
-		get_params.o \
+		get_rooms.o \
+		error.o \
+		other.o \
 		tools.o
 OBJ = $(patsubst %, $(OBJ_DIR)%, $(_OBJ))
 

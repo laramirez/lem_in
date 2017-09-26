@@ -6,7 +6,7 @@
 /*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 23:49:28 by lramirez          #+#    #+#             */
-/*   Updated: 2017/09/15 15:19:49 by lararamirez      ###   ########.fr       */
+/*   Updated: 2017/09/25 18:06:11 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 	while (tmp_list)
 	{
 		tmp_next = tmp_list->next;
-		del(tmp_list->content, tmp_list->content_size);
+		del(tmp_list->data, tmp_list->data_size);
 		free(tmp_list);
 		tmp_list = tmp_next;
 	}
