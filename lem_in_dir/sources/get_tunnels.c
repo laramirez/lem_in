@@ -6,20 +6,20 @@
 /*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 19:26:42 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/09/26 11:10:23 by lararamirez      ###   ########.fr       */
+/*   Updated: 2017/09/26 13:23:10 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-size_t	get_room_index(t_master *lem_in, char *data)
+size_t	get_room_index(t_master *lem_in, char *room_name)
 {
 	size_t	i;
-	
+
 	i = 0;
 	while (i < lem_in->room_count)
 	{
-		if (ft_strequ(lem_in->rooms[i], data))
+		if (ft_strequ(lem_in->rooms[i], room_name))
 			return (i);
 		i++;
 	}
@@ -37,25 +37,32 @@ char	not_duplicate_tunnel(t_list *tunnel_lst, size_t i)
 	return (1);
 }
 
-char	add_to_list_at_index(t_master *lem_in, char *adjacent_room, size_t i)
+char	add_to_list_at_index(t_master *lem_in, char *adj_room, size_t i)
 {
 	size_t	adj_i;
 
-	if ((adj_i = get_room_index(lem_in, adjacent_room)) == lem_in->room_count)
+	if ((adj_i = get_room_index(lem_in, adj_room)) == lem_in->room_count)
 		return (0);
 	if (not_duplicate_tunnel(lem_in->tunnels[i], adj_i))
 		ft_lstaddend(&lem_in->tunnels[i], ft_lstnew(&adj_i, sizeof(size_t)));
-	return (1);	
+	if (not_duplicate_tunnel(lem_in->tunnels[adj_i], i))
+		ft_lstaddend(&lem_in->tunnels[adj_i], ft_lstnew(&i, sizeof(size_t)));
+	return (1);
 }
 
 char	store_tunnel(t_master *lem_in, char *data)
 {
 	size_t	i;
-	
-	printf("room index is (%zu)\n", get_room_index(lem_in, data));	
-	if ((i = get_room_index(lem_in, data)) == lem_in->room_count ||
+	char	*tmp;
+
+	tmp = ft_strsub(data, 0, ft_strchr(data, '-') - data);
+	if ((i = get_room_index(lem_in, tmp)) == lem_in->room_count ||
 		!add_to_list_at_index(lem_in, ft_strchr(data, '-') + 1, i))
+	{
+		free(tmp);
 		return (0);
+	}
+	free(tmp);
 	return (1);
 }
 

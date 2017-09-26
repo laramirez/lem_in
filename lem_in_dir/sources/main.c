@@ -6,7 +6,7 @@
 /*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 12:10:54 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/09/26 11:04:50 by lararamirez      ###   ########.fr       */
+/*   Updated: 2017/09/26 13:31:34 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void		display_rooms(t_master *lem_in)
 	i = 0;
 	while (i < lem_in->room_count)
 	{
-		printf("room %zu is (%s)\n", i, lem_in->rooms[i]);
+		printf("room named (%s)	  is at [%zu]\n", lem_in->rooms[i], i);
 		i++;
 	}
 }
@@ -42,12 +42,13 @@ void		display_tunnels(t_master *lem_in)
 	{
 		if (lem_in->tunnels[i])
 		{
+			printf("Rooms linked to room at [%zu]:", i);
 			while (lem_in->tunnels[i]->next)
 			{
-				printf("%zu |", (size_t)lem_in->tunnels[i]->data);
+				printf(" %zu |", *(size_t *)lem_in->tunnels[i]->data);
 				lem_in->tunnels[i] = lem_in->tunnels[i]->next;
 			}
-			printf("%zu\n", (size_t)lem_in->tunnels[i]->data);
+			printf(" %zu\n", *(size_t *)lem_in->tunnels[i]->data);
 		}
 		i++;
 	}
@@ -89,7 +90,6 @@ int			main(void)
 	display_rooms(&lem_in);
 	printf("start_index is at %zu\n", lem_in.start_index);
 	printf("end_index is at %zu\n", lem_in.end_index);
-	printf("ptr is at %s\n", ptr->data);
 	get_tunnels(ptr, &lem_in);
 	display_tunnels(&lem_in);
 	// generate_move_instructions(lem_in);
