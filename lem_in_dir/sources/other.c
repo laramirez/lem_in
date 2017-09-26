@@ -6,7 +6,7 @@
 /*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 18:43:28 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/09/25 19:00:51 by lararamirez      ###   ########.fr       */
+/*   Updated: 2017/09/26 10:41:19 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ size_t	get_index(t_master *lem_in, char *name)
 	return (0);
 }
 
-char	not_duplicate(t_list *room, char *name)
+char	not_duplicate_room(t_list *room, char *name)
 {
 	while (room)
 	{
@@ -68,6 +68,28 @@ char	get_ant_count(char *data, t_master *lem_in)
 		ant_count <= LONG_MAX)
 		lem_in->ant_count = (size_t)ant_count;
 	else
+		return (0);
+	return (1);
+}
+
+char	check_coordinates(char **str, char **tmp, char *coordinates)
+{
+	(*tmp) += 1;
+	(*str) = (*tmp);
+	while (!(**tmp == ' '))
+	{
+		if (**tmp == '\0')
+		{
+			if (*coordinates == 1 && (*tmp != *str))
+				break ;
+			else
+				return (0);
+		}
+		else if (!ft_isdigit(**tmp))
+			return (0);
+		(*tmp)++;
+	}
+	if (*str == *tmp)
 		return (0);
 	return (1);
 }

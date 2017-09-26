@@ -6,7 +6,7 @@
 #    By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/25 16:11:33 by lararamirez       #+#    #+#              #
-#    Updated: 2017/09/25 19:01:21 by lararamirez      ###   ########.fr        #
+#    Updated: 2017/09/26 10:27:51 by lararamirez      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC_DIR = ./lem_in_dir/sources/
 OBJ_DIR = ./lem_in_dir/objects/
 _OBJ =	main.o \
 		get_rooms.o \
+		get_tunnels.o \
 		error.o \
 		other.o \
 		tools.o

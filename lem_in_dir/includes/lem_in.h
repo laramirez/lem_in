@@ -6,7 +6,7 @@
 /*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/22 12:21:19 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/09/25 19:23:59 by lararamirez      ###   ########.fr       */
+/*   Updated: 2017/09/26 10:52:49 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,53 @@ typedef struct	s_master
 }				t_master;
 
 /*
-** Functions in lem_in.c
+** Functions in main.c
 */
-t_list	*get_rooms(t_list *lst, t_master *lem_in);
-char	is_number(char *str);
-char	is_room(char *str);
-char	is_comment(char *str);
-char	is_command(char *str);
-char	is_tunnel(char *str);
-void	display_list(t_list *list);
-void    print_error_and_kill(char error_code);
-char	get_ant_count(char *data, t_master *lem_in);
-char	count_rooms(t_list *lst, t_master *lem_in);
-char	check_start_end(t_list *lst);
+void		initialize_main(t_master *lem_in, t_list **lst, char **line);
+void		display_rooms(t_master *lem_in);
+void		display_list(t_list *list);
+void		display_tunnels(t_master *lem_in);
+
+
+/*
+** Functions in get_rooms.c
+*/
+t_list		*get_rooms(t_list *input, t_master *lem_in);
+void		initialize_get_rooms(size_t *n, char *start, char *end);
+void		param_check(char start, char end, t_list *input);
+void		store_room(t_master *lem_in, char *data, size_t *n);
+void		index_start_end(char *start, char *end, t_master *lem_in, size_t *n);
+
+/*
+** Functions in get_tunnels.c
+*/
+void   		get_tunnels(t_list *input, t_master *lem_in);
+size_t		get_room_index(t_master *lem_in, char *data);
+char		store_tunnel(t_master *lem_in, char *data);
+char		add_to_list_at_index(t_master *lem_in, char *adjacent_room, size_t i);
+char		not_duplicate_tunnel(t_list *tunnel_lst, size_t i);
+
+/*
+** Functions in tools.c
+*/
+char		is_number(char *str);
+char		is_room(char *str);
+char		is_comment(char *str);
+char		is_command(char *str);
+char		is_tunnel(char *str);
+
+/*
+** Functions in other.c
+*/
+char		check_coordinates(char **str, char **tmp, char *coordinates);
+char		get_ant_count(char *data, t_master *lem_in);
+char		not_duplicate_room(t_list *room, char *name);
+size_t		get_index(t_master *lem_in, char *name);
+char		count_rooms(t_list *input, t_master *lem_in);
+
+/*
+** Functions in error.c
+*/
+void    	print_error_and_kill(char error_code);
 
 #endif

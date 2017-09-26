@@ -6,7 +6,7 @@
 /*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 12:10:54 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/09/25 19:28:42 by lararamirez      ###   ########.fr       */
+/*   Updated: 2017/09/26 11:04:50 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,26 @@ void		display_rooms(t_master *lem_in)
 	while (i < lem_in->room_count)
 	{
 		printf("room %zu is (%s)\n", i, lem_in->rooms[i]);
+		i++;
+	}
+}
+
+void		display_tunnels(t_master *lem_in)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < lem_in->room_count)
+	{
+		if (lem_in->tunnels[i])
+		{
+			while (lem_in->tunnels[i]->next)
+			{
+				printf("%zu |", (size_t)lem_in->tunnels[i]->data);
+				lem_in->tunnels[i] = lem_in->tunnels[i]->next;
+			}
+			printf("%zu\n", (size_t)lem_in->tunnels[i]->data);
+		}
 		i++;
 	}
 }
@@ -70,8 +90,8 @@ int			main(void)
 	printf("start_index is at %zu\n", lem_in.start_index);
 	printf("end_index is at %zu\n", lem_in.end_index);
 	printf("ptr is at %s\n", ptr->data);
-	// get_tunnels(ptr, &lem_in);
-	
+	get_tunnels(ptr, &lem_in);
+	display_tunnels(&lem_in);
 	// generate_move_instructions(lem_in);
 	// ft_printf("\n");
 	// display_list(*lem_in.instructions);

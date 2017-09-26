@@ -6,7 +6,7 @@
 /*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 11:23:46 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/09/25 18:57:28 by lararamirez      ###   ########.fr       */
+/*   Updated: 2017/09/26 10:38:22 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,28 +24,6 @@ char	is_number(char *str)
 		return (0);
 		str++;
 	}
-	return (1);
-}
-
-char	check_coordinates(char **str, char **tmp, char *coordinates)
-{
-	(*tmp) += 1;
-	(*str) = (*tmp);
-	while (!(**tmp == ' '))
-	{
-		if (**tmp == '\0')
-		{
-			if (*coordinates == 1 && (*tmp != *str))
-				break ;
-			else
-				return (0);
-		}
-		else if (!ft_isdigit(**tmp))
-			return (0);
-		(*tmp)++;
-	}
-	if (*str == *tmp)
-		return (0);
 	return (1);
 }
 
