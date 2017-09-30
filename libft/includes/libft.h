@@ -55,7 +55,6 @@ typedef	struct		s_arg
 	struct s_arg	*next;
 }					t_arg;
 
-
 /*
 ** ---MEMORY MANIPULATION---
 */

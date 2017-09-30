@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_tunnels.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
+/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 19:26:42 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/09/26 13:23:10 by lararamirez      ###   ########.fr       */
+/*   Updated: 2017/09/30 12:11:04 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	store_tunnel(t_master *lem_in, char *data)
 	return (1);
 }
 
-void    get_tunnels(t_list *input, t_master *lem_in)
+void	get_tunnels(t_list *input, t_master *lem_in)
 {
 	lem_in->tunnels =
 		(t_list **)ft_memalloc(sizeof(t_list *) * lem_in->room_count);
@@ -75,11 +75,11 @@ void    get_tunnels(t_list *input, t_master *lem_in)
 		if (is_tunnel((char *)input->data))
 		{
 			if (!store_tunnel(lem_in, (char *)input->data))
-				break;
+				break ;
 		}
 		else if ((!is_comment((char *)input->data) &&
 			!is_command((char *)input->data)))
-			break;
+			break ;
 		input = input->next;
 	}
 }

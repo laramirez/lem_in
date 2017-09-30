@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_rooms.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
+/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 09:20:10 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/09/25 20:03:49 by lararamirez      ###   ########.fr       */
+/*   Updated: 2017/09/30 12:12:24 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void		store_room(t_master *lem_in, char *data, size_t *n)
 {
 	size_t	i;
 	char	*tmp;
-	
+
 	i = 0;
 	tmp = ft_strsub(data, 0, ft_strchr(data, ' ') - data);
 	while (i < lem_in->room_count)
@@ -80,8 +80,8 @@ t_list		*get_rooms(t_list *input, t_master *lem_in)
 		}
 		else if ((!is_comment((char *)input->data) &&
 			!is_command((char *)input->data)))
-			break;
-		input = input->next;	
+			break ;
+		input = input->next;
 	}
 	param_check(start, end, input);
 	return (input);

@@ -21,7 +21,7 @@ char	is_number(char *str)
 	while (*str)
 	{
 		if (!ft_isdigit(*str))
-		return (0);
+			return (0);
 		str++;
 	}
 	return (1);
@@ -31,7 +31,7 @@ char	is_room(char *str)
 {
 	char	*tmp;
 	char	coordinates;
-	
+
 	tmp = str;
 	coordinates = 2;
 	if (*str == 'L' || *str == '#')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   other.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
+/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 18:43:28 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/09/26 10:41:19 by lararamirez      ###   ########.fr       */
+/*   Updated: 2017/09/30 12:13:19 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ char	count_rooms(t_list *input, t_master *lem_in)
 			!is_command((char *)input->data) &&
 				!ft_strequ("##start", (char *)input->data) &&
 					!ft_strequ("##end", (char *)input->data))
-			break;
-		input = input->next;		
+			break ;
+		input = input->next;
 	}
 	if (lem_in->room_count == 0)
 		return (0);
@@ -63,7 +63,7 @@ char	not_duplicate_room(t_list *room, char *name)
 char	get_ant_count(char *data, t_master *lem_in)
 {
 	long	ant_count;
-	
+
 	if (is_number(data) && (ant_count = ft_atoi(data)) > 0 &&
 		ant_count <= LONG_MAX)
 		lem_in->ant_count = (size_t)ant_count;
