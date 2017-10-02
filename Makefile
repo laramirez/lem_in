@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+         #
+#    By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/25 16:11:33 by lararamirez       #+#    #+#              #
-#    Updated: 2017/09/26 10:27:51 by lararamirez      ###   ########.fr        #
+#    Updated: 2017/10/02 11:38:40 by lramirez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ OBJ_DIR = ./lem_in_dir/objects/
 _OBJ =	main.o \
 		get_rooms.o \
 		get_tunnels.o \
+		find_all_paths.o \
 		error.o \
 		other.o \
 		tools.o

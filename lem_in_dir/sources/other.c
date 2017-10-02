@@ -6,7 +6,7 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 18:43:28 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/09/30 12:13:19 by lramirez         ###   ########.fr       */
+/*   Updated: 2017/10/02 11:36:09 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,6 @@ char	count_rooms(t_list *input, t_master *lem_in)
 		return (0);
 	lem_in->rooms = (char **)ft_memalloc(sizeof(char *) * lem_in->room_count);
 	return (1);
-}
-
-size_t	get_index(t_master *lem_in, char *name)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < lem_in->room_count)
-	{
-		if (ft_strequ(lem_in->rooms[i], name))
-		{
-			free(name);
-			return (i);
-		}
-		i++;
-	}
-	free(name);
-	return (0);
 }
 
 char	not_duplicate_room(t_list *room, char *name)

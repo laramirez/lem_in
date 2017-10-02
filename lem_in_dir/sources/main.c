@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
+/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 12:10:54 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/09/26 13:31:34 by lararamirez      ###   ########.fr       */
+/*   Updated: 2017/10/02 13:40:23 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 void		display_list(t_list *list)
 {
-	while (list)
+	t_list	*tmp;
+
+	tmp = list;
+	while (tmp)
 	{
-		printf("%s\n", list->data);
-		list = list->next;
+		printf("%zu\n", *(size_t *)tmp->data);
+		tmp = tmp->next;
 	}
 }
 
@@ -26,9 +29,10 @@ void		display_rooms(t_master *lem_in)
 	size_t	i;
 
 	i = 0;
+	printf("\n ROOM INDEX\n\n");
 	while (i < lem_in->room_count)
 	{
-		printf("room named (%s)	  is at [%zu]\n", lem_in->rooms[i], i);
+		printf("	[%zu] (%s)\n", i, lem_in->rooms[i]);
 		i++;
 	}
 }
@@ -36,19 +40,22 @@ void		display_rooms(t_master *lem_in)
 void		display_tunnels(t_master *lem_in)
 {
 	size_t	i;
+	t_list	**tmp;
 
 	i = 0;
+	printf("\n TUNNELS INDEX\n\n");
+	tmp = lem_in->tunnels;
 	while (i < lem_in->room_count)
 	{
-		if (lem_in->tunnels[i])
+		if (tmp[i])
 		{
-			printf("Rooms linked to room at [%zu]:", i);
-			while (lem_in->tunnels[i]->next)
+			printf("	[%zu] >", i);
+			while (tmp[i]->next)
 			{
-				printf(" %zu |", *(size_t *)lem_in->tunnels[i]->data);
-				lem_in->tunnels[i] = lem_in->tunnels[i]->next;
+				printf(" [%zu] &", *(size_t *)tmp[i]->data);
+				tmp[i] = tmp[i]->next;
 			}
-			printf(" %zu\n", *(size_t *)lem_in->tunnels[i]->data);
+			printf(" [%zu]\n", *(size_t *)tmp[i]->data);
 		}
 		i++;
 	}
@@ -88,10 +95,13 @@ int			main(void)
 		print_error_and_kill(2);
 	ptr = get_rooms(lst->next, &lem_in);
 	display_rooms(&lem_in);
-	printf("start_index is at %zu\n", lem_in.start_index);
-	printf("end_index is at %zu\n", lem_in.end_index);
+	printf("\n START & END INDEX\n\n");
+	printf("	start_index	[%zu]\n", lem_in.start_index);
+	printf("	end_index	[%zu]\n", lem_in.end_index);
 	get_tunnels(ptr, &lem_in);
 	display_tunnels(&lem_in);
+	printf("\n");
+	get_all_paths_and_cost(&lem_in);
 	// generate_move_instructions(lem_in);
 	// ft_printf("\n");
 	// display_list(*lem_in.instructions);

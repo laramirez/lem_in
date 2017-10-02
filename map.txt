@@ -1,19 +1,25 @@
 20
 ##start
-START 23 3
-one 16 7
+room_1 23 3
+room_2 16 7
 #commentaire
-two 16 3
-one_bis 16 5
-two_bis 9 3
-three_bis 1 5
+room_3 16 3
+room_4 16 5
+room_5 9 3
+room_6 1 5
+room_7 4 8
 ##end
-END 9 5
-START-one
-START-one_bis
-one-two
-one_bis-two_bis
-two-two_bis
-two_bis-three_bis
-three_bis-END
-two-END
+room_0 9 5
+room_0-room_4
+room_0-room_6
+room_1-room_3
+room_4-room_3
+room_5-room_2
+room_3-room_5
+#autre commentaire
+room_4-room_2
+room_2-room_1
+room_7-room_6
+room_7-room_2
+room_7-room_4
+room_6-room_5

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
+/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/22 12:21:19 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/09/26 10:52:49 by lararamirez      ###   ########.fr       */
+/*   Updated: 2017/10/02 13:01:16 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,17 @@ typedef struct	s_master
 	size_t			start_index;
 	size_t			end_index;
 	t_list			**tunnels;
+	t_list			**all_paths;
 	t_list			*instructions;
 }				t_master;
+
+typedef struct	s_path
+{
+	size_t			ant_ID;
+	size_t			start_index;
+	t_list			*path;
+	size_t			cost;
+}				t_path;
 
 /*
 ** Functions in main.c
@@ -67,6 +76,11 @@ char			store_tunnel(t_master *lem_in, char *data);
 char			add_to_list_at_index(t_master *lem_in,
 					char *adjacent_room, size_t i);
 char			not_duplicate_tunnel(t_list *tunnel_lst, size_t i);
+
+/*
+** Functions in find_all_paths.c
+*/
+void			get_all_paths_and_cost(t_master *lem_in);
 
 /*
 ** Functions in tools.c
