@@ -6,7 +6,7 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/01 17:47:02 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/10/02 19:46:03 by lramirez         ###   ########.fr       */
+/*   Updated: 2017/10/03 11:09:15 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,19 @@ void		add_to_path_list(t_master *lem_in, size_t ant_ID, t_list *path)
 	ft_lstaddend(&lem_in->all_paths, ft_lstnew(&new, sizeof(t_path)));
 }
 
-void		get_path(t_master *lem_in, size_t start, char *visited)
+void		reset_visited(t_list *path, char **visited)
+{
+	t_list	*tmp;
+	
+	tmp = path;
+	while(tmp->next->next)
+	{
+		*visited[*(size_t *)tmp->data] = '0';
+		tmp = tmp->next;
+	}
+}
+
+void		get_path(t_master *lem_in, size_t start, char **visited)
 {
 	t_list	*search;
 	size_t	i_current;
@@ -68,11 +80,11 @@ void		get_path(t_master *lem_in, size_t start, char *visited)
 	path = NULL;
 	i_current = start;
 	ft_lstaddend(&path, ft_lstnew(&i_current, sizeof(size_t)));
-	visited[i_current] = '1';
+	*visited[i_current] = '1';
 	while (i_current != lem_in->end_index)
 	{
 		search = lem_in->tunnels[i_current];
-		while (visited[*(size_t *)search->data] == '1')
+		while (*visited[*(size_t *)search->data] == '1')
 		{
 			search = search->next;
 			if (!search)
@@ -80,17 +92,30 @@ void		get_path(t_master *lem_in, size_t start, char *visited)
 		}
 		i_current = *(size_t *)search->data;
 		ft_lstaddend(&path, ft_lstnew(&i_current, sizeof(size_t)));
-		visited[i_current] = '1';
+		*visited[i_current] = '1';
 	}
 	if (valid_path(path, lem_in->end_index))
 		add_to_path_list(lem_in, 0, path);
-	free(visited);
-	display_paths(lem_in);
+	reset_visited(path, visited);
+}
+
+char		unvisited_nodes(char *visited)
+{
+	while (visited)
+	{
+		if (*visited == '0')
+			return (1);
+		visited++;
+	}
+	return (0);
 }
 
 void		get_all_paths(t_master *lem_in)
 {
 	char    *visited;
 	visited = ft_create_padding('O', lem_in->room_count);
-	get_path(lem_in, lem_in->start_index, visited);
+	while (unvisited_nodes(visited))
+		get_path(lem_in, lem_in->start_index, &visited);
+	free(visited);
+	display_paths(lem_in);	
 }
