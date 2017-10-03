@@ -6,7 +6,7 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/01 17:47:02 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/10/03 11:09:15 by lramirez         ###   ########.fr       */
+/*   Updated: 2017/10/03 13:30:39 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,10 @@ void		reset_visited(t_list *path, char **visited)
 	tmp = path;
 	while(tmp->next->next)
 	{
-		*visited[*(size_t *)tmp->data] = '0';
+		(*visited)[*(size_t *)tmp->data] = '0';
 		tmp = tmp->next;
 	}
+	(*visited)[*(size_t *)tmp->next->data] = '0';
 }
 
 void		get_path(t_master *lem_in, size_t start, char **visited)
@@ -80,19 +81,22 @@ void		get_path(t_master *lem_in, size_t start, char **visited)
 	path = NULL;
 	i_current = start;
 	ft_lstaddend(&path, ft_lstnew(&i_current, sizeof(size_t)));
-	*visited[i_current] = '1';
+	(*visited)[i_current] = '1';
 	while (i_current != lem_in->end_index)
 	{
 		search = lem_in->tunnels[i_current];
-		while (*visited[*(size_t *)search->data] == '1')
+		printf("i_current is [%zu]\n", i_current);
+		while ((*visited)[*(size_t *)search->data] == '1')
 		{
+			printf("[%zu]\n", *(size_t *)search->data);
+			printf("[%s]\n", *visited);
 			search = search->next;
 			if (!search)
 				break ;
 		}
 		i_current = *(size_t *)search->data;
 		ft_lstaddend(&path, ft_lstnew(&i_current, sizeof(size_t)));
-		*visited[i_current] = '1';
+		(*visited)[i_current] = '1';
 	}
 	if (valid_path(path, lem_in->end_index))
 		add_to_path_list(lem_in, 0, path);
@@ -113,9 +117,12 @@ char		unvisited_nodes(char *visited)
 void		get_all_paths(t_master *lem_in)
 {
 	char    *visited;
-	visited = ft_create_padding('O', lem_in->room_count);
+	visited = ft_create_padding('0', lem_in->room_count);
 	while (unvisited_nodes(visited))
+	{
 		get_path(lem_in, lem_in->start_index, &visited);
+		display_paths(lem_in);
+	}
 	free(visited);
 	display_paths(lem_in);	
 }

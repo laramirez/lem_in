@@ -6,7 +6,7 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/22 12:21:19 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/10/03 11:06:21 by lramirez         ###   ########.fr       */
+/*   Updated: 2017/10/03 13:16:02 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void			get_path(t_master *lem_in, size_t start, char **visited);
 char			valid_path(t_list *path, size_t end_index);
 void			get_all_paths(t_master *lem_in);
 void			reset_visited(t_list *path, char **visited);
+char			unvisited_nodes(char *visited);
+
 
 /*
 ** Functions in tools.c
