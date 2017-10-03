@@ -6,7 +6,7 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 12:10:54 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/10/02 13:40:23 by lramirez         ###   ########.fr       */
+/*   Updated: 2017/10/02 16:25:43 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,22 @@ void		display_rooms(t_master *lem_in)
 void		display_tunnels(t_master *lem_in)
 {
 	size_t	i;
-	t_list	**tmp;
+	t_list	*tmp;
 
 	i = 0;
 	printf("\n TUNNELS INDEX\n\n");
-	tmp = lem_in->tunnels;
 	while (i < lem_in->room_count)
 	{
-		if (tmp[i])
+		if (lem_in->tunnels[i])
 		{
+			tmp = lem_in->tunnels[i];
 			printf("	[%zu] >", i);
-			while (tmp[i]->next)
+			while (tmp->next)
 			{
-				printf(" [%zu] &", *(size_t *)tmp[i]->data);
-				tmp[i] = tmp[i]->next;
+				printf(" [%zu] &", *(size_t *)tmp->data);
+				tmp = tmp->next;
 			}
-			printf(" [%zu]\n", *(size_t *)tmp[i]->data);
+			printf(" [%zu]\n", *(size_t *)tmp->data);
 		}
 		i++;
 	}
@@ -69,6 +69,7 @@ void		initialize_main(t_master *lem_in, t_list **lst, char **line)
 	lem_in->start_index = 0;
 	lem_in->end_index = 0;
 	lem_in->tunnels = NULL;
+	lem_in->all_paths = NULL;
 	lem_in->instructions = NULL;
 	(*lst) = NULL;
 	(*line) = NULL;
@@ -100,8 +101,7 @@ int			main(void)
 	printf("	end_index	[%zu]\n", lem_in.end_index);
 	get_tunnels(ptr, &lem_in);
 	display_tunnels(&lem_in);
-	printf("\n");
-	get_all_paths_and_cost(&lem_in);
+	get_all_paths(&lem_in);
 	// generate_move_instructions(lem_in);
 	// ft_printf("\n");
 	// display_list(*lem_in.instructions);

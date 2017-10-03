@@ -6,7 +6,7 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/22 12:21:19 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/10/02 13:01:16 by lramirez         ###   ########.fr       */
+/*   Updated: 2017/10/02 16:42:23 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct	s_master
 	size_t			start_index;
 	size_t			end_index;
 	t_list			**tunnels;
-	t_list			**all_paths;
+	t_list			*all_paths;
 	t_list			*instructions;
 }				t_master;
 
@@ -45,7 +45,7 @@ typedef struct	s_path
 {
 	size_t			ant_ID;
 	size_t			start_index;
-	t_list			*path;
+	t_list			*itin;
 	size_t			cost;
 }				t_path;
 
@@ -80,7 +80,9 @@ char			not_duplicate_tunnel(t_list *tunnel_lst, size_t i);
 /*
 ** Functions in find_all_paths.c
 */
-void			get_all_paths_and_cost(t_master *lem_in);
+void		get_path(t_master *lem_in, size_t start);
+char		valid_path(t_list *path, size_t end_index);
+void		get_all_paths(t_master *lem_in);
 
 /*
 ** Functions in tools.c

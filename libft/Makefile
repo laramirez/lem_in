@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+         #
+#    By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/21 16:48:26 by lramirez          #+#    #+#              #
-#    Updated: 2017/09/15 15:29:11 by lararamirez      ###   ########.fr        #
+#    Updated: 2017/10/02 16:35:42 by lramirez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,8 @@ _LIB_OBJ =	ft_memalloc.o	ft_memdel.o		ft_strnew.o		ft_strdel.o		\
 			e_output_ft_asprintf.o											\
 			e_output_ft_printf.o											\
 			parsing_tools.o													\
-			ft_printf.o
+			ft_printf.o														\
+			ft_lstlen.o
 LIB_OBJ = $(patsubst %, $(LIB_OBJ_DIR)%, $(_LIB_OBJ))
 
 CFLAGS = -Wall -Wextra -Werror -O3
