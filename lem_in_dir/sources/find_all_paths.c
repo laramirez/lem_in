@@ -6,7 +6,7 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/01 17:47:02 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/10/03 13:30:39 by lramirez         ###   ########.fr       */
+/*   Updated: 2017/10/03 15:43:32 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void		add_to_path_list(t_master *lem_in, size_t ant_ID, t_list *path)
 	ft_lstaddend(&lem_in->all_paths, ft_lstnew(&new, sizeof(t_path)));
 }
 
-void		reset_visited(t_list *path, char **visited)
+size_t		reset_visited(t_list *path, char **visited)
 {
 	t_list	*tmp;
 	
@@ -70,9 +70,10 @@ void		reset_visited(t_list *path, char **visited)
 		tmp = tmp->next;
 	}
 	(*visited)[*(size_t *)tmp->next->data] = '0';
+	return (*(size_t *)tmp->data);
 }
 
-void		get_path(t_master *lem_in, size_t start, char **visited)
+void		get_path(t_master *lem_in, size_t start, char **visited, size_t *i_divert)
 {
 	t_list	*search;
 	size_t	i_current;
@@ -86,21 +87,27 @@ void		get_path(t_master *lem_in, size_t start, char **visited)
 	{
 		search = lem_in->tunnels[i_current];
 		printf("i_current is [%zu]\n", i_current);
-		while ((*visited)[*(size_t *)search->data] == '1')
+		while ((*visited)[*(size_t *)search->data] == '1' && search)
 		{
+			if (*(size_t *)search->data == *i_divert && *i_divert != start)
+				(*visited)[*(size_t *)search->data] = '0';
+			printf("i_divert [%zu]\n", *i_divert);
 			printf("[%zu]\n", *(size_t *)search->data);
 			printf("[%s]\n", *visited);
 			search = search->next;
-			if (!search)
-				break ;
 		}
+		if (!search)
+			break ;
 		i_current = *(size_t *)search->data;
 		ft_lstaddend(&path, ft_lstnew(&i_current, sizeof(size_t)));
 		(*visited)[i_current] = '1';
 	}
 	if (valid_path(path, lem_in->end_index))
 		add_to_path_list(lem_in, 0, path);
-	reset_visited(path, visited);
+	(*visited)[*i_divert] = '1';
+	if (!unvisited_nodes(*visited))
+		return ;
+	*i_divert = reset_visited(path, visited);
 }
 
 char		unvisited_nodes(char *visited)
@@ -117,10 +124,13 @@ char		unvisited_nodes(char *visited)
 void		get_all_paths(t_master *lem_in)
 {
 	char    *visited;
+	size_t	i_divert;
+
+	i_divert = lem_in->start_index;
 	visited = ft_create_padding('0', lem_in->room_count);
 	while (unvisited_nodes(visited))
 	{
-		get_path(lem_in, lem_in->start_index, &visited);
+		get_path(lem_in, lem_in->start_index, &visited, &i_divert);
 		display_paths(lem_in);
 	}
 	free(visited);
