@@ -59,7 +59,7 @@ void		add_to_path_list(t_master *lem_in, size_t ant_ID, t_list *path)
 	ft_lstaddend(&lem_in->all_paths, ft_lstnew(&new, sizeof(t_path)));
 }
 
-size_t		reset_visited(t_list *path, char **visited)
+size_t		reset_visited(t_list *path, char **visited, size_t i_divert)
 {
 	t_list	*tmp;
 	

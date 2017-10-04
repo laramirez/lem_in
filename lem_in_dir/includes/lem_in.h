@@ -6,7 +6,7 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/22 12:21:19 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/10/03 15:35:01 by lramirez         ###   ########.fr       */
+/*   Updated: 2017/10/04 14:02:33 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,22 @@ typedef struct	s_master
 	size_t			start_index;
 	size_t			end_index;
 	t_list			**tunnels;
-	t_list			*all_paths;
+	t_list			*paths_lst;
 	t_list			*instructions;
 }				t_master;
 
 typedef struct	s_path
 {
-	size_t			ant_ID;
-	size_t			start_index;
 	t_list			*itin;
 	size_t			cost;
 }				t_path;
+
+typedef struct	s_stack
+{
+	size_t			room;
+	size_t			previous_room;
+	struct s_stack	*next;
+}				t_stack;
 
 /*
 ** Functions in main.c
@@ -78,13 +83,16 @@ char			add_to_list_at_index(t_master *lem_in,
 char			not_duplicate_tunnel(t_list *tunnel_lst, size_t i);
 
 /*
-** Functions in find_all_paths.c
+** Functions in compute_paths_and_costs.c
 */
-void			get_path(t_master *lem_in, size_t start, char **visited, size_t *i_divert);
+void			pile_onto_stack(size_t current_node, size_t adj_node, t_stack **queue);
+void			display_paths(t_master *lem_in);
+void			compute_paths_and_costs(t_master *lem_in);
+char        	add_adj_nodes_to_queue(t_master *lem_in, size_t current_node,
+					char *visited, t_stack **queue);
+void			print_queue(t_stack **queue);
+void			add_to_path_lst(t_master *lem_in, t_list **path);
 char			valid_path(t_list *path, size_t end_index);
-void			get_all_paths(t_master *lem_in);
-size_t			reset_visited(t_list *path, char **visited);
-char			unvisited_nodes(char *visited);
 
 
 /*
@@ -108,6 +116,7 @@ char			count_rooms(t_list *input, t_master *lem_in);
 /*
 ** Functions in error.c
 */
-void			print_error_and_kill(char error_code);
+void			print_preprocess_error_and_kill(char error_code);
+void			print_processing_error_and_kill(char error_code);
 
 #endif

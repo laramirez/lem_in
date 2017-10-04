@@ -6,7 +6,7 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 09:20:10 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/09/30 12:12:24 by lramirez         ###   ########.fr       */
+/*   Updated: 2017/10/04 11:43:11 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void		store_room(t_master *lem_in, char *data, size_t *n)
 	while (i < lem_in->room_count)
 	{
 		if (ft_strequ(tmp, lem_in->rooms[i]))
-			print_error_and_kill(4);
+			print_preprocess_error_and_kill(4);
 		i++;
 	}
 	lem_in->rooms[*n] = tmp;
@@ -53,9 +53,9 @@ void		store_room(t_master *lem_in, char *data, size_t *n)
 void		param_check(char start, char end, t_list *input)
 {
 	if (start != 2 || end != 2)
-		print_error_and_kill(3);
+		print_preprocess_error_and_kill(3);
 	if (!input)
-		print_error_and_kill(4);
+		print_preprocess_error_and_kill(4);
 }
 
 t_list		*get_rooms(t_list *input, t_master *lem_in)
