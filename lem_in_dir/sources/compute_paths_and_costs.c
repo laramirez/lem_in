@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   compute_paths_and_costs.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 11:01:26 by lramirez          #+#    #+#             */
-/*   Updated: 2017/10/04 20:52:00 by lramirez         ###   ########.fr       */
+/*   Updated: 2017/10/05 11:25:36 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void		display_paths(t_master *lem_in)
 	{
 		tmp = ((t_path *)path_lst->data)->itin;
 		printf("\n ** path %zu ** ", i);
-		printf(" cost (%zu): ", ((t_path *)path_lst->data)->cost);
+		printf("	costs (%zu) moves: ", ((t_path *)path_lst->data)->cost);
 		while (tmp->next)
 		{
-			printf(" [%zu] --", *(size_t *)tmp->data);
+			printf(" [%zu] -->", *(size_t *)tmp->data);
 			tmp = tmp->next;
 		}
 		printf(" [%zu]\n\n", *(size_t *)tmp->data);
@@ -66,6 +66,8 @@ char        add_adj_nodes_to_queue(t_master *lem_in, size_t current_node,
 	size_t	count;
 	t_list	*tunnels;
 
+	if (current_node == lem_in->end_index)
+		return (0);
 	count = 0;
 	tunnels = lem_in->tunnels[current_node];
 	visited[current_node] = '1';
@@ -160,6 +162,7 @@ size_t		backtrack_to_queued(t_list **path, t_stack **queue,
 	}
 	ft_lstaddend(&new_path, ft_lstnew((size_t *)tmp->data, sizeof(size_t)));
 	(*visited)[*(size_t *)tmp->data] = '1';
+	(*visited)[*(size_t *)tmp->next->data] = '1';
 	if (!valid_path(*path, end_index))
 		delete_lst(path);
 	*path = new_path;
@@ -176,23 +179,26 @@ void		compute_paths_and_costs(t_master *lem_in)
 
 	queue = NULL;
 	path = NULL;
-	start = 3;
+	start = 1;
 	current_node = lem_in->start_index;
 	visited = ft_create_padding('0', lem_in->room_count);
-	while (start)
+	while (start || queue)
 	{
 		start--;
-		while (current_node != lem_in->end_index && add_adj_nodes_to_queue(lem_in, current_node, visited, &queue))
+		while (add_adj_nodes_to_queue(lem_in, current_node, visited, &queue))
 		{
 			ft_lstaddend(&path, ft_lstnew(&current_node, sizeof(size_t)));
 			current_node = pop_off_queue(&queue);
 		}
 		ft_lstaddend(&path, ft_lstnew(&current_node, sizeof(size_t)));
-		if (valid_path(path, lem_in->end_index))
+		if (current_node == lem_in->end_index)
 			add_to_path_lst(lem_in, &path);
+		if (!queue)
+			break ;
 		current_node = backtrack_to_queued(&path, &queue, &visited, lem_in->end_index);
+		pop_off_queue(&queue);
 	}
-	print_queue(&queue);
+	// print_queue(&queue);
 	display_paths(lem_in);
 	// free(visited);
 }
