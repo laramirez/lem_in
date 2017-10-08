@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
+/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 12:10:54 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/10/07 18:17:54 by lararamirez      ###   ########.fr       */
+/*   Updated: 2017/10/08 10:07:08 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int			main(void)
 	printf("	end_index	[%zu]\n", lem_in.end_index);
 	get_tunnels(ptr, &lem_in);
 	display_tunnels(&lem_in);
-	compute_paths_and_costs(&lem_in, lem_in.start_index);
+	find_paths(&lem_in, lem_in.start_index);
 	// generate_move_instructions(lem_in);
 	// ft_printf("\n");
 	// display_list(*lem_in.instructions);
