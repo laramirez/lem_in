@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 12:10:54 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/10/04 13:11:30 by lramirez         ###   ########.fr       */
+/*   Updated: 2017/10/07 18:17:54 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void		initialize_main(t_master *lem_in, t_list **lst, char **line)
 	lem_in->start_index = 0;
 	lem_in->end_index = 0;
 	lem_in->tunnels = NULL;
-	lem_in->paths_lst = NULL;
+	lem_in->all_paths = NULL;
 	lem_in->instructions = NULL;
 	(*lst) = NULL;
 	(*line) = NULL;
@@ -101,7 +101,7 @@ int			main(void)
 	printf("	end_index	[%zu]\n", lem_in.end_index);
 	get_tunnels(ptr, &lem_in);
 	display_tunnels(&lem_in);
-	compute_paths_and_costs(&lem_in);
+	compute_paths_and_costs(&lem_in, lem_in.start_index);
 	// generate_move_instructions(lem_in);
 	// ft_printf("\n");
 	// display_list(*lem_in.instructions);

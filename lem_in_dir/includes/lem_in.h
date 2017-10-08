@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/22 12:21:19 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/10/04 14:02:33 by lramirez         ###   ########.fr       */
+/*   Updated: 2017/10/07 18:34:27 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,22 @@ typedef struct	s_master
 	size_t			start_index;
 	size_t			end_index;
 	t_list			**tunnels;
-	t_list			*paths_lst;
+	t_list			*all_paths;
 	t_list			*instructions;
 }				t_master;
 
 typedef struct	s_path
 {
 	t_list			*itin;
+	char			**visited;
 	size_t			cost;
 }				t_path;
 
 typedef struct	s_stack
 {
-	size_t			room;
-	size_t			previous_room;
-	struct s_stack	*next;
+	t_path			*bottom;
+	t_path			*top;
+	size_t			size;
 }				t_stack;
 
 /*
@@ -85,15 +86,17 @@ char			not_duplicate_tunnel(t_list *tunnel_lst, size_t i);
 /*
 ** Functions in compute_paths_and_costs.c
 */
-void			pile_onto_stack(size_t current_node, size_t adj_node, t_stack **queue);
+char			queue_possible_paths(t_master *lem_in, size_t current_node,
+					t_path *current_path, t_stack **queue);
+void			pile_onto_stack(t_list **path, t_stack **queue);
 void			display_paths(t_master *lem_in);
-void			compute_paths_and_costs(t_master *lem_in);
+void			compute_paths_and_costs(t_master *lem_in, size_t start);
 char        	add_adj_nodes_to_queue(t_master *lem_in, size_t current_node,
-					char *visited, t_stack **queue);
+					char **visited, t_stack **queue);
 void			print_queue(t_stack **queue);
 void			add_to_path_lst(t_master *lem_in, t_list **path);
 char			valid_path(t_list *path, size_t end_index);
-
+char       		adj_nodes(t_master *lem_in, size_t current_node, char *visited);
 
 /*
 ** Functions in tools.c
@@ -117,6 +120,7 @@ char			count_rooms(t_list *input, t_master *lem_in);
 ** Functions in error.c
 */
 void			print_preprocess_error_and_kill(char error_code);
-void			print_processing_error_and_kill(char error_code);
+void			print_process_error_and_kill(char error_code);
+
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 16:56:29 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/10/04 12:04:00 by lramirez         ###   ########.fr       */
+/*   Updated: 2017/10/07 17:58:17 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_preprocess_error_and_kill(char error_code)
 	exit(EXIT_FAILURE);
 }
 
-void	print_processing_error_and_kill(char error_code)
+void	print_process_error_and_kill(char error_code)
 {
 	if (error_code == 0)
 		dprintf(2, "ERROR [there is no way out, the ants are stuck forever!!]");
