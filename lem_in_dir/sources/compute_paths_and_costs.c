@@ -6,7 +6,7 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 11:01:26 by lramirez          #+#    #+#             */
-/*   Updated: 2017/10/08 12:40:20 by lramirez         ###   ########.fr       */
+/*   Updated: 2017/10/08 14:20:09 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ void		move_to_path_lst(t_master *lem_in, t_stack *queue)
 	ft_lstaddend(&lem_in->all_paths, ft_lstnew(queue->bottom, sizeof(t_path)));
 	tmp = queue->bottom;
 	queue->bottom = tmp->previous;
-	queue->bottom->next = NULL;
+	tmp->next = NULL;
 	queue->size--;
 }
 
@@ -211,9 +211,7 @@ void		find_paths(t_master *lem_in, size_t start)
 	size_t		current_node;
 	t_path		*current_path;
 	t_stack		*queue;
-	char		count;
 
-	count = 80;
 	current_node = start;
 	initialize_find_paths(&current_path, &queue, lem_in->room_count);
 	ft_lstaddend(&current_path->itin, ft_lstnew(&current_node, sizeof(size_t)));
@@ -227,14 +225,12 @@ void		find_paths(t_master *lem_in, size_t start)
 		if (!(current_node == lem_in->end_index))
 		{
 			if (queue->bottom->cost < lem_in->ant_count)
-				queue_possible_paths(lem_in, current_node, queue->bottom, queue);
+				queue_possible_paths(lem_in, current_node,
+					queue->bottom, queue);
 			pop_off_bottom_queue(queue);
 		}
 		else
 			move_to_path_lst(lem_in, queue);
-		count--;
-		printf("stack size is %zu\n", queue->size);
 	}
-	// print_queue(queue);
 	display_paths(lem_in);
 }

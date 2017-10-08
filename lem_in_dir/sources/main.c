@@ -6,7 +6,7 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 12:10:54 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/10/08 10:07:08 by lramirez         ###   ########.fr       */
+/*   Updated: 2017/10/08 14:22:23 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int			main(void)
 	find_paths(&lem_in, lem_in.start_index);
 	// generate_move_instructions(lem_in);
 	// ft_printf("\n");
-	// display_list(*lem_in.instructions);
+	display_list(lem_in.instructions);
 	// free everything!
 	return (0);
 }
