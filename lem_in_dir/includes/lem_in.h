@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
+/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/22 12:21:19 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/10/07 18:34:27 by lararamirez      ###   ########.fr       */
+/*   Updated: 2017/10/07 22:47:50 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,12 @@
 **	- A master structure stocking all these
 */
 
-typedef struct	s_master
-{
-	size_t			ant_count;
-	char			**rooms;
-	size_t			room_count;
-	size_t			start_index;
-	size_t			end_index;
-	t_list			**tunnels;
-	t_list			*all_paths;
-	t_list			*instructions;
-}				t_master;
-
 typedef struct	s_path
 {
 	t_list			*itin;
-	char			**visited;
+	char			*visited;
 	size_t			cost;
+	struct s_path	*next;
 }				t_path;
 
 typedef struct	s_stack
@@ -54,6 +43,18 @@ typedef struct	s_stack
 	t_path			*top;
 	size_t			size;
 }				t_stack;
+
+typedef struct	s_master
+{
+	size_t			ant_count;
+	char			**rooms;
+	size_t			room_count;
+	size_t			start_index;
+	size_t			end_index;
+	t_list			**tunnels;
+	t_path			*all_paths;
+	t_list			*instructions;
+}				t_master;
 
 /*
 ** Functions in main.c
@@ -87,16 +88,20 @@ char			not_duplicate_tunnel(t_list *tunnel_lst, size_t i);
 ** Functions in compute_paths_and_costs.c
 */
 char			queue_possible_paths(t_master *lem_in, size_t current_node,
-					t_path *current_path, t_stack **queue);
-void			pile_onto_stack(t_list **path, t_stack **queue);
+					t_path *current_path, t_stack *queue);
+void			pile_onto_stack(t_path *path, t_stack *queue);
 void			display_paths(t_master *lem_in);
 void			compute_paths_and_costs(t_master *lem_in, size_t start);
 char        	add_adj_nodes_to_queue(t_master *lem_in, size_t current_node,
 					char **visited, t_stack **queue);
-void			print_queue(t_stack **queue);
+void			print_queue(t_stack *queue);
 void			add_to_path_lst(t_master *lem_in, t_list **path);
 char			valid_path(t_list *path, size_t end_index);
 char       		adj_nodes(t_master *lem_in, size_t current_node, char *visited);
+char			*fill_visited(t_path *path, size_t room_count);
+void			print_path(t_list *itin);
+
+
 
 /*
 ** Functions in tools.c
