@@ -6,7 +6,7 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 11:01:26 by lramirez          #+#    #+#             */
-/*   Updated: 2017/10/08 14:20:09 by lramirez         ###   ########.fr       */
+/*   Updated: 2017/10/13 12:41:00 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,9 +224,8 @@ void		find_paths(t_master *lem_in, size_t start)
 		current_node = queue->bottom->last_node;
 		if (!(current_node == lem_in->end_index))
 		{
-			if (queue->bottom->cost < lem_in->ant_count)
-				queue_possible_paths(lem_in, current_node,
-					queue->bottom, queue);
+			// if (queue->bottom->cost < lem_in->ant_count || !lem_in->all_paths)
+				queue_possible_paths(lem_in, current_node, queue->bottom, queue);
 			pop_off_bottom_queue(queue);
 		}
 		else

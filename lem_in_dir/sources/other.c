@@ -6,7 +6,7 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 18:43:28 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/10/02 11:36:09 by lramirez         ###   ########.fr       */
+/*   Updated: 2017/10/13 12:33:15 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,27 @@ char	get_ant_count(char *data, t_master *lem_in)
 	return (1);
 }
 
-char	check_coordinates(char **str, char **tmp, char *coordinates)
+char	check_coordinates(char *str)
 {
-	(*tmp) += 1;
-	(*str) = (*tmp);
-	while (!(**tmp == ' '))
+	char	coordinates;
+
+	coordinates = 0;
+	while (*str)
 	{
-		if (**tmp == '\0')
+		if (ft_isdigit(*str))
 		{
-			if (*coordinates == 1 && (*tmp != *str))
-				break ;
-			else
-				return (0);
+			coordinates++;
+			while (ft_isdigit(*str))
+				str++;
 		}
-		else if (!ft_isdigit(**tmp))
-			return (0);
-		(*tmp)++;
+		else
+			break ;
+		if (*str == ' ')
+			str++;
+		else
+			break ;
 	}
-	if (*str == *tmp)
-		return (0);
-	return (1);
+	if (coordinates == 2)
+		return (1);
+	return (0);
 }

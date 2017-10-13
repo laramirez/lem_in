@@ -6,7 +6,7 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/22 12:21:19 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/10/08 11:30:06 by lramirez         ###   ########.fr       */
+/*   Updated: 2017/10/13 12:30:54 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ char			is_tunnel(char *str);
 /*
 ** Functions in other.c
 */
-char			check_coordinates(char **str, char **tmp, char *coordinates);
+char			check_coordinates(char *str);
 char			get_ant_count(char *data, t_master *lem_in);
 char			not_duplicate_room(t_list *room, char *name);
 size_t			get_index(t_master *lem_in, char *name);

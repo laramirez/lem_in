@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
+/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 11:23:46 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/09/26 10:38:22 by lararamirez      ###   ########.fr       */
+/*   Updated: 2017/10/13 12:32:42 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,8 @@ char	is_number(char *str)
 char	is_room(char *str)
 {
 	char	*tmp;
-	char	coordinates;
 
 	tmp = str;
-	coordinates = 2;
 	if (*str == 'L' || *str == '#')
 		return (0);
 	while (!(*tmp == ' '))
@@ -44,12 +42,8 @@ char	is_room(char *str)
 	}
 	if (tmp == str)
 		return (0);
-	while (coordinates)
-	{
-		if (!check_coordinates(&str, &tmp, &coordinates))
-			return (0);
-		coordinates -= 1;
-	}
+	if (!check_coordinates(tmp + 1))
+		return (0);
 	return (1);
 }
 

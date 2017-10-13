@@ -1,4 +1,4 @@
-20
+2
 ##start
 room_1 23 3
 room_2 16 7
