@@ -224,8 +224,7 @@ void		find_paths(t_master *lem_in, size_t start)
 		current_node = queue->bottom->last_node;
 		if (!(current_node == lem_in->end_index))
 		{
-			// if (queue->bottom->cost < lem_in->ant_count || !lem_in->all_paths)
-				queue_possible_paths(lem_in, current_node, queue->bottom, queue);
+			queue_possible_paths(lem_in, current_node, queue->bottom, queue);
 			pop_off_bottom_queue(queue);
 		}
 		else
