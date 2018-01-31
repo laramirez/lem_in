@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   compute_paths_and_costs.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 11:01:26 by lramirez          #+#    #+#             */
-/*   Updated: 2018/01/16 18:25:27 by lramirez         ###   ########.fr       */
+/*   Updated: 2018/01/31 12:15:08 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 void	generate_and_display_instructions(t_master *lem_in)
 {
 	t_list	*path;
-	t_list	*path_orig;
+	t_list	*parent_path;
 	size_t	ant_ID;
+	size_t	parent_ant_ID;
 	size_t	lines;
 
 	ant_ID = 1;
@@ -27,17 +28,18 @@ void	generate_and_display_instructions(t_master *lem_in)
 		while (ant_ID <= lines && ant_ID <= lem_in->ant_count)
 		{
 			ft_printf("L%zu-%s", ant_ID, lem_in->rooms[*(size_t *)path->data]);
+			parent_ant_ID = ant_ID;
 			ant_ID++;
-			path_orig = path;
+			parent_path = path;
 			path = path->next;
-			if (ant_ID == lines && ant_ID == lem_in->ant_count)
+			if (ant_ID == lines || ant_ID == lem_in->ant_count)
 			{
+				ant_ID = parent_ant_ID;
+				path = parent_path;
 				ft_printf("\n");
-				path = ((t_path *)lem_in->all_paths->data)->itin->next;
+				path = parent_path;
 				ant_ID = 1;
 			}
-			else
-			ft_printf(" ");
 		}
 	}
 
@@ -63,21 +65,23 @@ void		display_paths(t_master *lem_in)
 
 	i = 1;
 	path_lst = lem_in->all_paths;
-	printf("\n ALL POSSIBLE PATHS\n");
+	ft_printf("------------------\n");
+	ft_printf("ALL POSSIBLE PATHS\n");
 	while (path_lst)
 	{
 		tmp = ((t_path *)path_lst->data)->itin;
-		printf("\n ** path %zu ** ", i);
-		printf("	costs (%zu) moves: ", ((t_path *)path_lst->data)->cost);
+		ft_printf("\n** path %zu ** ", i);
+		ft_printf("	costs (%zu) moves: ", ((t_path *)path_lst->data)->cost);
 		while (tmp->next)
 		{
-			printf(" [%s] -->", lem_in->rooms[*(size_t *)tmp->data]);
+			ft_printf(" [%s] -->", lem_in->rooms[*(size_t *)tmp->data]);
 			tmp = tmp->next;
 		}
-		printf(" [%s]\n\n", lem_in->rooms[*(size_t *)tmp->data]);
+		ft_printf(" [%s]\n", lem_in->rooms[*(size_t *)tmp->data]);
 		path_lst = path_lst->next;
 		i++;
 	}
+	ft_printf("------------------\n\n");
 }
 
 char		*fill_visited(t_path *path, size_t room_count)

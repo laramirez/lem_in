@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 12:10:54 by lararamirez       #+#    #+#             */
-/*   Updated: 2018/01/16 17:42:00 by lramirez         ###   ########.fr       */
+/*   Updated: 2018/01/31 10:32:25 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int			main(void)
 	display_list(lem_in.instructions);
 	// display_rooms(&lem_in);
 	// display_tunnels(&lem_in);
-	// display_paths(&lem_in);
+	display_paths(&lem_in);
 	generate_and_display_instructions(&lem_in);
 	// free everything! (lst and lem_in and instr)
 	return (0);
