@@ -6,7 +6,7 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 12:10:54 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/10/08 14:22:23 by lramirez         ###   ########.fr       */
+/*   Updated: 2018/01/16 17:42:00 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,12 @@ void		display_rooms(t_master *lem_in)
 	printf("\n ROOM INDEX\n\n");
 	while (i < lem_in->room_count)
 	{
-		printf("	[%zu] (%s)\n", i, lem_in->rooms[i]);
+		if (i == lem_in->start_index)
+			printf("	[%zu] (room name: %s) *start\n", i, lem_in->rooms[i]);
+		else if (i == lem_in->end_index)
+			printf("	[%zu] (room name: %s) *end\n", i, lem_in->rooms[i]);
+		else
+			printf("	[%zu] (room name: %s)\n", i, lem_in->rooms[i]);
 		i++;
 	}
 }
@@ -75,6 +80,15 @@ void		initialize_main(t_master *lem_in, t_list **lst, char **line)
 	(*line) = NULL;
 }
 
+void		display_entry(t_list **lst)
+{
+	while (*lst)
+	{
+		ft_printf("%s\n", (*lst)->data);
+		(*lst) = (*lst)->next;
+	}
+}
+
 int			main(void)
 {
 	t_master	lem_in;
@@ -95,16 +109,15 @@ int			main(void)
 	if (!count_rooms(lst->next, &lem_in))
 		print_preprocess_error_and_kill(2);
 	ptr = get_rooms(lst->next, &lem_in);
-	display_rooms(&lem_in);
-	printf("\n START & END INDEX\n\n");
-	printf("	start_index	[%zu]\n", lem_in.start_index);
-	printf("	end_index	[%zu]\n", lem_in.end_index);
 	get_tunnels(ptr, &lem_in);
-	display_tunnels(&lem_in);
 	find_paths(&lem_in, lem_in.start_index);
-	// generate_move_instructions(lem_in);
-	// ft_printf("\n");
+	display_entry(&lst);
+	ft_printf("\n");
 	display_list(lem_in.instructions);
-	// free everything!
+	// display_rooms(&lem_in);
+	// display_tunnels(&lem_in);
+	// display_paths(&lem_in);
+	generate_and_display_instructions(&lem_in);
+	// free everything! (lst and lem_in and instr)
 	return (0);
 }

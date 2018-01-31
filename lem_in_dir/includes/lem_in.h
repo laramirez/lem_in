@@ -6,7 +6,7 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/22 12:21:19 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/10/13 12:30:54 by lramirez         ###   ########.fr       */
+/*   Updated: 2018/01/09 16:18:49 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,13 @@ typedef struct	s_master
 	t_list			*instructions;
 }				t_master;
 
+// typdef struct	s_ant
+// {
+// 	size_t			ID;
+// 	size_t			current_room;
+// }				t_ant;
+
+
 /*
 ** Functions in main.c
 */
@@ -65,6 +72,7 @@ void			initialize_main(t_master *lem_in, t_list **lst, char **line);
 void			display_rooms(t_master *lem_in);
 void			display_list(t_list *list);
 void			display_tunnels(t_master *lem_in);
+void			display_entry(t_list **lst);
 
 /*
 ** Functions in get_rooms.c
@@ -103,6 +111,8 @@ void			free_path(t_path **path);
 void			move_to_path_lst(t_master *lem_in, t_stack *queue);
 void			pop_off_bottom_queue(t_stack *queue);
 void			display_paths(t_master *lem_in);
+void			generate_and_display_instructions(t_master *lem_in);
+
 
 /*
 ** Functions in tools.c

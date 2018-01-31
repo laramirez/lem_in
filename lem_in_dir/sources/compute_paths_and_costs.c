@@ -6,29 +6,53 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 11:01:26 by lramirez          #+#    #+#             */
-/*   Updated: 2017/10/13 12:41:00 by lramirez         ###   ########.fr       */
+/*   Updated: 2018/01/16 18:25:27 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void		print_queue(t_stack *queue)
+void	generate_and_display_instructions(t_master *lem_in)
 {
-	t_path	*path;
-	size_t	count;
+	t_list	*path;
+	t_list	*path_orig;
+	size_t	ant_ID;
+	size_t	lines;
 
-	path = queue->top;
-	count = 1;
-	while (path)
+	ant_ID = 1;
+	lines = 1;
+	path = ((t_path *)lem_in->all_paths->data)->itin->next;
+	while (!(ant_ID == lem_in->ant_count && *(size_t *)path->data == lem_in->end_index))
 	{
-		printf("\n ** path %zu ** ", count);
-		printf("\n (%s) ", path->visited);
-		printf("	costs (%zu) ", path->cost);
-		print_path(path->itin);
-		printf("	last node == [%zu]\n", path->last_node);
-		path = path->next;
-		count++;
+		while (ant_ID <= lines && ant_ID <= lem_in->ant_count)
+		{
+			ft_printf("L%zu-%s", ant_ID, lem_in->rooms[*(size_t *)path->data]);
+			ant_ID++;
+			path_orig = path;
+			path = path->next;
+			if (ant_ID == lines && ant_ID == lem_in->ant_count)
+			{
+				ft_printf("\n");
+				path = ((t_path *)lem_in->all_paths->data)->itin->next;
+				ant_ID = 1;
+			}
+			else
+			ft_printf(" ");
+		}
 	}
+
+	// while (ant_nbr < lem_in->ant_count)
+	// {
+		
+		
+	// 	while (path)
+	// 	{
+	// 		printf("L%zu-%s", ant_nbr, lem_in->rooms[*(size_t *)path->data]);
+	// 		printf(" ");
+	// 		path = path->next;
+	// 		ant_nbr++;
+	// 	}
+	// }
 }
 
 void		display_paths(t_master *lem_in)
@@ -47,10 +71,10 @@ void		display_paths(t_master *lem_in)
 		printf("	costs (%zu) moves: ", ((t_path *)path_lst->data)->cost);
 		while (tmp->next)
 		{
-			printf(" [%zu] -->", *(size_t *)tmp->data);
+			printf(" [%s] -->", lem_in->rooms[*(size_t *)tmp->data]);
 			tmp = tmp->next;
 		}
-		printf(" [%zu]\n\n", *(size_t *)tmp->data);
+		printf(" [%s]\n\n", lem_in->rooms[*(size_t *)tmp->data]);
 		path_lst = path_lst->next;
 		i++;
 	}
@@ -230,5 +254,4 @@ void		find_paths(t_master *lem_in, size_t start)
 		else
 			move_to_path_lst(lem_in, queue);
 	}
-	display_paths(lem_in);
 }
