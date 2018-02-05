@@ -6,7 +6,7 @@
 /*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 12:10:54 by lararamirez       #+#    #+#             */
-/*   Updated: 2018/01/31 10:32:25 by lararamirez      ###   ########.fr       */
+/*   Updated: 2018/02/02 15:51:15 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int			main(void)
 	display_entry(&lst);
 	ft_printf("\n");
 	display_list(lem_in.instructions);
-	// display_rooms(&lem_in);
+	display_rooms(&lem_in);
 	// display_tunnels(&lem_in);
 	display_paths(&lem_in);
 	generate_and_display_instructions(&lem_in);

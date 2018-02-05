@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/22 12:21:19 by lararamirez       #+#    #+#             */
-/*   Updated: 2018/01/09 16:18:49 by lramirez         ###   ########.fr       */
+/*   Updated: 2018/02/05 17:31:09 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ typedef struct	s_master
 	t_list			*instructions;
 }				t_master;
 
-// typdef struct	s_ant
-// {
-// 	size_t			ID;
-// 	size_t			current_room;
-// }				t_ant;
-
+typedef struct	s_room
+{
+	char			received_ant;
+	size_t			index;
+	struct s_room	*next;
+}				t_room;
 
 /*
 ** Functions in main.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_rooms.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 09:20:10 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/10/04 11:43:11 by lramirez         ###   ########.fr       */
+/*   Updated: 2018/02/02 15:55:16 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

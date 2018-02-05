@@ -6,55 +6,71 @@
 /*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 11:01:26 by lramirez          #+#    #+#             */
-/*   Updated: 2018/01/31 12:15:08 by lararamirez      ###   ########.fr       */
+/*   Updated: 2018/02/05 18:14:14 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
+t_room	*add_path(t_master *lem_in)
+{
+	t_room	*new;
+	t_room	*ret;
+	t_list	*tmp;
+	
+	tmp = ((t_path *)lem_in->all_paths->data)->itin->next;
+	new = (t_room *)ft_memalloc(sizeof(t_room));
+	ret = new;
+	new->received_ant = 0;
+	new->index = (size_t)tmp->data;
+	tmp = tmp->next;
+	while (tmp)
+	{
+		new->next = (t_room *)ft_memalloc(sizeof(t_room));
+		new->next->next = NULL;
+		new->next->received_ant = 0;
+		new->next->index = (size_t)tmp->data;
+		new = new->next;
+		tmp = tmp->next;
+	}
+	return (ret);
+}
+
 void	generate_and_display_instructions(t_master *lem_in)
 {
-	t_list	*path;
-	t_list	*parent_path;
-	size_t	ant_ID;
-	size_t	parent_ant_ID;
-	size_t	lines;
+	t_room	*ants[lem_in->ant_count];
+	t_room	*room;
+	size_t	ant_id;
+	size_t	count;
 
-	ant_ID = 1;
-	lines = 1;
-	path = ((t_path *)lem_in->all_paths->data)->itin->next;
-	while (!(ant_ID == lem_in->ant_count && *(size_t *)path->data == lem_in->end_index))
+	ant_id = 0;
+	count = 0;
+	while (ant_id < lem_in->ant_count)
 	{
-		while (ant_ID <= lines && ant_ID <= lem_in->ant_count)
+		ants[ant_id] = add_path(lem_in);
+		ant_id++;
+	}
+	ant_id = 0;
+	while (ant_id < lem_in->ant_count)
+	{
+		room = ants[ant_id];
+		while (room && room->received_ant != 0)
+			room = room->next;
+		if (!room)
+			ant_id++;
+		else
 		{
-			ft_printf("L%zu-%s", ant_ID, lem_in->rooms[*(size_t *)path->data]);
-			parent_ant_ID = ant_ID;
-			ant_ID++;
-			parent_path = path;
-			path = path->next;
-			if (ant_ID == lines || ant_ID == lem_in->ant_count)
+			ft_printf("L%zu-%s", ant_id + 1, lem_in->rooms[*(size_t *)room->index]);
+			if (ant_id == count || (ant_id + 1 == lem_in->ant_count && *(size_t *)room->index == lem_in->end_index))
 			{
-				ant_ID = parent_ant_ID;
-				path = parent_path;
 				ft_printf("\n");
-				path = parent_path;
-				ant_ID = 1;
+				count++;
 			}
+			else
+				ft_printf(" ");
+			room->received_ant = 1;
 		}
 	}
-
-	// while (ant_nbr < lem_in->ant_count)
-	// {
-		
-		
-	// 	while (path)
-	// 	{
-	// 		printf("L%zu-%s", ant_nbr, lem_in->rooms[*(size_t *)path->data]);
-	// 		printf(" ");
-	// 		path = path->next;
-	// 		ant_nbr++;
-	// 	}
-	// }
 }
 
 void		display_paths(t_master *lem_in)
