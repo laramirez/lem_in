@@ -6,11 +6,11 @@
 #    By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/25 16:11:33 by lararamirez       #+#    #+#              #
-#    Updated: 2017/10/04 11:59:08 by lramirez         ###   ########.fr        #
+#    Updated: 2018/02/08 13:18:02 by lramirez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = lem_in
+NAME = lem-in
 
 LIBFT = ./libft/libft.a
 INCLUDES = ./lem_in_dir/includes/lem_in.h

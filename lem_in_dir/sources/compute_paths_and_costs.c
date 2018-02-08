@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   compute_paths_and_costs.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
+/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 11:01:26 by lramirez          #+#    #+#             */
-/*   Updated: 2018/02/05 18:14:14 by lararamirez      ###   ########.fr       */
+/*   Updated: 2018/02/08 13:25:07 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,20 @@ void	generate_and_display_instructions(t_master *lem_in)
 		else
 		{
 			ft_printf("L%zu-%s", ant_id + 1, lem_in->rooms[*(size_t *)room->index]);
-			if (ant_id == count || (ant_id + 1 == lem_in->ant_count && *(size_t *)room->index == lem_in->end_index))
+			room->received_ant = 1;
+			if (ant_id == count || ant_id+1 == lem_in->ant_count)
 			{
 				ft_printf("\n");
+				if (ant_id+1 == lem_in->ant_count && *(size_t *)room->index == lem_in->end_index)
+					break;
 				count++;
+				ant_id = 0;
 			}
 			else
+			{
 				ft_printf(" ");
-			room->received_ant = 1;
+				ant_id++;
+			}
 		}
 	}
 }
