@@ -6,7 +6,7 @@
 #    By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/25 16:11:33 by lararamirez       #+#    #+#              #
-#    Updated: 2018/02/08 13:18:02 by lramirez         ###   ########.fr        #
+#    Updated: 2018/02/08 16:32:23 by lramirez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ OBJ_DIR = ./lem_in_dir/objects/
 _OBJ =	main.o \
 		get_rooms.o \
 		get_tunnels.o \
-		compute_paths_and_costs.o \
+		compute_instructions.o \
+		find_paths.o \
 		error.o \
 		other.o \
 		tools.o
