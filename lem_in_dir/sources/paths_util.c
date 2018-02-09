@@ -6,7 +6,7 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 18:07:11 by lramirez          #+#    #+#             */
-/*   Updated: 2018/02/08 18:36:37 by lramirez         ###   ########.fr       */
+/*   Updated: 2018/02/09 17:17:33 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,18 @@
 void		free_path(t_path **path)
 {
 	t_list	*tmp;
-	t_list	*tmp_next;
 
-	tmp = (*path)->itin;
-	while (tmp)
+	while ((*path)->itin)
 	{
-		tmp_next = tmp->next;
+		tmp = (*path)->itin;
+		(*path)->itin = (*path)->itin->next;
+		free(tmp->data);
+		tmp->data = NULL;
 		free(tmp);
-		tmp = tmp_next;
+		tmp = NULL;
 	}
 	free((*path)->visited);
+	(*path)->visited = NULL;
 	free(*path);
 	*path = NULL;
 }
@@ -37,6 +39,7 @@ void		pop_off_bottom_queue(t_stack *queue)
 	queue->bottom = tmp->previous;
 	tmp->previous->next = NULL;
 	free_path(&tmp);
+	tmp = NULL;
 	queue->size--;
 }
 

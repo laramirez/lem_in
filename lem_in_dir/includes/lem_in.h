@@ -6,7 +6,7 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/22 12:21:19 by lararamirez       #+#    #+#             */
-/*   Updated: 2018/02/08 18:52:34 by lramirez         ###   ########.fr       */
+/*   Updated: 2018/02/09 16:52:25 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
-# include <stdio.h>
 # include "../../libft/includes/libft.h"
 
 /*
@@ -69,6 +68,8 @@ typedef struct	s_room
 ** Functions in main.c
 */
 void			initialize_main(t_master *lem_in, t_list **lst, char **line);
+void			free_list(t_list **lst);
+void			free_tunnels(t_master *lem_in);
 
 /*
 ** Functions in get_rooms.c
@@ -121,6 +122,8 @@ void			display_paths(t_master *lem_in);
 void			display_list(t_list *list);
 void			display_rooms(t_master *lem_in);
 void			display_tunnels(t_master *lem_in);
+void			display_entry(t_list **lst);
+
 
 /*
 ** Functions in error.c

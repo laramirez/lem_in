@@ -6,7 +6,7 @@
 #    By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/25 16:11:33 by lararamirez       #+#    #+#              #
-#    Updated: 2018/02/08 16:32:23 by lramirez         ###   ########.fr        #
+#    Updated: 2018/02/09 14:15:52 by lramirez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,11 @@ _OBJ =	main.o \
 		get_tunnels.o \
 		compute_instructions.o \
 		find_paths.o \
+		paths_util.o \
 		error.o \
-		other.o \
+		initialize.o \
+		display.o \
+		check.o \
 		tools.o
 OBJ = $(patsubst %, $(OBJ_DIR)%, $(_OBJ))
 

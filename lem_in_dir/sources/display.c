@@ -6,7 +6,7 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 18:33:24 by lramirez          #+#    #+#             */
-/*   Updated: 2018/02/08 18:41:14 by lramirez         ###   ########.fr       */
+/*   Updated: 2018/02/09 14:12:20 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,12 @@ void		display_tunnels(t_master *lem_in)
 
 void		display_entry(t_list **lst)
 {
-	while (*lst)
+	t_list	*tmp;
+	
+	tmp = *lst;
+	while (tmp)
 	{
-		ft_printf("%s\n", (*lst)->data);
-		(*lst) = (*lst)->next;
+		ft_printf("%s\n", tmp->data);
+		tmp = tmp->next;
 	}
 }
