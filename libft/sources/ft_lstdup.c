@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
+/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 18:09:32 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/10/07 18:09:57 by lararamirez      ###   ########.fr       */
+/*   Updated: 2018/02/10 18:16:34 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ t_list		*ft_lstdup(t_list *path)
 		ft_lstaddend(&path_cpy, ft_lstnew(scan->data, scan->data_size));
 		scan = scan->next;
 	}
-	return(path_cpy);
+	return (path_cpy);
 }

@@ -6,7 +6,7 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/22 12:21:19 by lararamirez       #+#    #+#             */
-/*   Updated: 2018/02/09 16:52:25 by lramirez         ###   ########.fr       */
+/*   Updated: 2018/02/10 18:15:11 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ typedef struct	s_master
 	t_list			**tunnels;
 	t_list			*all_paths;
 	t_list			*instructions;
+	char			r_opt;
+	char			t_opt;
+	char			p_opt;
 }				t_master;
 
 typedef struct	s_room
@@ -70,6 +73,7 @@ typedef struct	s_room
 void			initialize_main(t_master *lem_in, t_list **lst, char **line);
 void			free_list(t_list **lst);
 void			free_tunnels(t_master *lem_in);
+int				get_option(char *arg, t_master *lem_in);
 
 /*
 ** Functions in get_rooms.c
@@ -111,7 +115,8 @@ char			check_coordinates(char *str);
 /*
 ** Functions in compute_instructions.c
 */
-int				print(t_master *lem_in, size_t *ant_id, size_t *count, t_room *room);
+int				print(t_master *lem_in, size_t *ant_id,
+					size_t *count, t_room *room);
 void			init(size_t *ant_id, size_t *count);
 void			generate_and_display_instructions(t_master *lem_in);
 
@@ -124,12 +129,13 @@ void			display_rooms(t_master *lem_in);
 void			display_tunnels(t_master *lem_in);
 void			display_entry(t_list **lst);
 
-
 /*
 ** Functions in error.c
 */
+void			print_usage_and_kill(char error_code);
 void			print_preprocess_error_and_kill(char error_code);
 void			print_process_error_and_kill(char error_code);
+void			stop_input(t_list **previous, t_list **input);
 
 /*
 ** Functions in initialize.c

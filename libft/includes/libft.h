@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
+/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 16:02:13 by lramirez          #+#    #+#             */
-/*   Updated: 2017/10/07 18:10:48 by lararamirez      ###   ########.fr       */
+/*   Updated: 2018/02/10 18:15:40 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,6 @@ void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 size_t				ft_lstlen(t_list *lst);
 t_list				*ft_lstdup(t_list *lst);
-
 
 /*
 ** ---ERROR HANDLING---

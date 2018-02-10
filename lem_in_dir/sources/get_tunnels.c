@@ -6,7 +6,7 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 19:26:42 by lararamirez       #+#    #+#             */
-/*   Updated: 2017/09/30 12:11:04 by lramirez         ###   ########.fr       */
+/*   Updated: 2018/02/10 14:56:15 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,26 +60,38 @@ char	store_tunnel(t_master *lem_in, char *data)
 		!add_to_list_at_index(lem_in, ft_strchr(data, '-') + 1, i))
 	{
 		free(tmp);
+		tmp = NULL;
 		return (0);
 	}
 	free(tmp);
+	tmp = NULL;
 	return (1);
 }
 
 void	get_tunnels(t_list *input, t_master *lem_in)
 {
+	t_list	*prev;
+
 	lem_in->tunnels =
 		(t_list **)ft_memalloc(sizeof(t_list *) * lem_in->room_count);
+	prev = input;
 	while (input)
 	{
 		if (is_tunnel((char *)input->data))
 		{
 			if (!store_tunnel(lem_in, (char *)input->data))
+			{
+				stop_input(&prev, &input);
 				break ;
+			}
 		}
 		else if ((!is_comment((char *)input->data) &&
 			!is_command((char *)input->data)))
+		{
+			stop_input(&prev, &input);
 			break ;
+		}
+		prev = input;
 		input = input->next;
 	}
 }

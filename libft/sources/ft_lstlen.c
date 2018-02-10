@@ -6,7 +6,7 @@
 /*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/02 16:33:07 by lramirez          #+#    #+#             */
-/*   Updated: 2017/10/02 16:36:11 by lramirez         ###   ########.fr       */
+/*   Updated: 2018/02/10 18:17:14 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 size_t	ft_lstlen(t_list *lst)
 {
-	size_t  len;
+	size_t len;
 
-    len = 0;
-    while (lst)
+	len = 0;
+	while (lst)
 	{
 		len++;
-        lst = lst->next;
+		lst = lst->next;
 	}
-    return (len);
+	return (len);
 }
