@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 12:10:54 by lararamirez       #+#    #+#             */
-/*   Updated: 2018/02/10 18:07:20 by lramirez         ###   ########.fr       */
+/*   Updated: 2018/02/12 12:17:34 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,26 @@ void		free_list(t_list **lst)
 	{
 		tmp = *lst;
 		*lst = (*lst)->next;
+		free(tmp->data);
+		tmp->data = NULL;
 		free(tmp);
+		tmp = NULL;
 	}
-	tmp = NULL;
+	*lst = NULL;
+}
+
+void		free_rooms(t_master *lem_in)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < lem_in->room_count)
+	{
+		ft_strdel(&lem_in->rooms[i]);
+		i++;
+	}
+	free(lem_in->rooms);
+	lem_in->rooms = NULL;
 }
 
 void		free_tunnels(t_master *lem_in)
@@ -32,22 +49,28 @@ void		free_tunnels(t_master *lem_in)
 	i = 0;
 	while (i < lem_in->room_count)
 	{
-		free_list(&(lem_in->tunnels[i]));
+		free_list(&lem_in->tunnels[i]);
+		lem_in->tunnels[i] = NULL;
 		i++;
 	}
+	free(lem_in->tunnels);
+	lem_in->tunnels = NULL;
 }
 
-void		free_paths(t_list *all_paths)
+void		free_paths(t_master *lem_in)
 {
 	t_list *tmp;
 	
-	while (all_paths)
+	while (lem_in->all_paths)
 	{
-		tmp = all_paths;
-		all_paths = all_paths->next;
+		tmp = lem_in->all_paths;
+		lem_in->all_paths = lem_in->all_paths->next;
 		free_path((t_path **)&tmp->data);
+		tmp->data = NULL;
+		free(tmp);
+		tmp = NULL;
 	}
-	tmp->data = NULL;
+	free(lem_in->all_paths);
 }
 
 void		initialize_main(t_master *lem_in, t_list **lst, char **line)
@@ -67,12 +90,6 @@ void		initialize_main(t_master *lem_in, t_list **lst, char **line)
 	(*line) = NULL;
 }
 
-// instructions = NULL;
-// 	if (argc <= 1)
-// 		usage();
-// 	option = ft_strequ("-t", argv[1]) ? 1 : 0;
-// 	if (option && argc == 2)
-// 		usage();
 int			get_option(char *arg, t_master *lem_in)
 {
 	if (*arg != '-')
@@ -126,7 +143,13 @@ int			main(int argc, char **argv)
 	}
 	ptr = get_rooms(lst->next, &lem_in);
 	get_tunnels(ptr, &lem_in);
-	find_paths(&lem_in, lem_in.start_index);
+	if (!find_paths(&lem_in, lem_in.start_index))
+	{
+		free_list(&lst);
+		free_paths(&lem_in);
+		free_rooms(&lem_in);
+		print_process_error_and_kill(0);
+	}
 	display_entry(&lst);
 	ft_printf("\n");
 	if (lem_in.r_opt)
@@ -136,10 +159,10 @@ int			main(int argc, char **argv)
 	if (lem_in.p_opt)
 		display_paths(&lem_in);
 	generate_and_display_instructions(&lem_in);
+	free_rooms(&lem_in);
 	free_list(&lst);
-	// free_paths(lem_in.all_paths);
-	// free_list(&lem_in.instructions);
-	// free_tunnels(&lem_in);
-	
+	free_paths(&lem_in);
+	free_list(&lem_in.instructions);
+	free_tunnels(&lem_in);
 	return (0);
 }

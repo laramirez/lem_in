@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_tunnels.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 19:26:42 by lararamirez       #+#    #+#             */
-/*   Updated: 2018/02/10 14:56:15 by lramirez         ###   ########.fr       */
+/*   Updated: 2018/02/12 10:39:11 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,10 @@ char	store_tunnel(t_master *lem_in, char *data)
 	if ((i = get_room_index(lem_in, tmp)) == lem_in->room_count ||
 		!add_to_list_at_index(lem_in, ft_strchr(data, '-') + 1, i))
 	{
-		free(tmp);
-		tmp = NULL;
+		ft_strdel(&tmp);
 		return (0);
 	}
-	free(tmp);
-	tmp = NULL;
+	ft_strdel(&tmp);
 	return (1);
 }
 

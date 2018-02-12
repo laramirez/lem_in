@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+         #
+#    By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/25 16:11:33 by lararamirez       #+#    #+#              #
-#    Updated: 2018/02/09 14:15:52 by lramirez         ###   ########.fr        #
+#    Updated: 2018/02/12 10:00:40 by lararamirez      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ _OBJ =	main.o \
 		tools.o
 OBJ = $(patsubst %, $(OBJ_DIR)%, $(_OBJ))
 
-CFLAGS = -Wall -Wextra -Werror -O3
+CFLAGS = -Wall -Wextra -Werror -g -O0 -O3
 VPATH = sources:includes
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/22 12:21:19 by lararamirez       #+#    #+#             */
-/*   Updated: 2018/02/10 18:15:11 by lramirez         ###   ########.fr       */
+/*   Updated: 2018/02/12 11:28:55 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void			initialize_main(t_master *lem_in, t_list **lst, char **line);
 void			free_list(t_list **lst);
 void			free_tunnels(t_master *lem_in);
 int				get_option(char *arg, t_master *lem_in);
+void			free_paths(t_master *lem_in);
+
 
 /*
 ** Functions in get_rooms.c
@@ -102,7 +104,7 @@ char			*fill_visited(t_path *path, size_t room_count);
 t_list			*add_current_node(t_path *current_path, size_t current_node);
 char			queue_possible_paths(t_master *lem_in, size_t current_node,
 					t_path *current_path, t_stack *queue);
-void			find_paths(t_master *lem_in, size_t start);
+int				find_paths(t_master *lem_in, size_t start);
 
 /*
 ** Functions in check.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 18:07:11 by lramirez          #+#    #+#             */
-/*   Updated: 2018/02/09 17:17:33 by lramirez         ###   ########.fr       */
+/*   Updated: 2018/02/12 12:03:53 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ void		free_path(t_path **path)
 		free(tmp);
 		tmp = NULL;
 	}
-	free((*path)->visited);
-	(*path)->visited = NULL;
+	free((*path)->itin);
+	(*path)->itin = NULL;
+	ft_strdel(&(*path)->visited);
 	free(*path);
 	*path = NULL;
 }

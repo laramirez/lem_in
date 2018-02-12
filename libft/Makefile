@@ -6,7 +6,7 @@
 #    By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/21 16:48:26 by lramirez          #+#    #+#              #
-#    Updated: 2017/10/07 18:10:10 by lararamirez      ###   ########.fr        #
+#    Updated: 2018/02/12 10:00:24 by lararamirez      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ _LIB_OBJ =	ft_memalloc.o	ft_memdel.o		ft_strnew.o		ft_strdel.o		\
 			ft_lstdup.o
 LIB_OBJ = $(patsubst %, $(LIB_OBJ_DIR)%, $(_LIB_OBJ))
 
-CFLAGS = -Wall -Wextra -Werror -O3
+CFLAGS = -Wall -Wextra -Werror -g -O0 -O3
 VPATH = sources:includes
 
 $(LIB_OBJ_DIR)%.o : $(LIB_SRC_DIR)%.c
