@@ -6,7 +6,7 @@
 /*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 18:07:11 by lramirez          #+#    #+#             */
-/*   Updated: 2018/02/12 12:03:53 by lararamirez      ###   ########.fr       */
+/*   Updated: 2018/02/12 19:44:49 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,19 @@ void		free_path(t_path **path)
 	*path = NULL;
 }
 
-void		pop_off_bottom_queue(t_stack *queue)
+void		pop_off_bottom_queue(t_stack *queue, char to_free)
 {
 	t_path		*tmp;
 
 	tmp = queue->bottom;
 	queue->bottom = tmp->previous;
-	tmp->previous->next = NULL;
-	free_path(&tmp);
+	if (queue->size > 1)
+		tmp->previous->next = NULL;
+	if (to_free)
+	{
+		ft_printf("path (%x) freed\n", tmp);
+		free_path(&tmp);
+	}
 	tmp = NULL;
 	queue->size--;
 }
@@ -89,11 +94,7 @@ t_room		*add_path(t_master *lem_in)
 
 void		move_to_path_lst(t_master *lem_in, t_stack *queue)
 {
-	t_path		*tmp;
-
 	ft_lstaddend(&lem_in->all_paths, ft_lstnew(queue->bottom, sizeof(t_path)));
-	tmp = queue->bottom;
-	queue->bottom = tmp->previous;
-	tmp->next = NULL;
-	queue->size--;
+	ft_printf("is now here (%x)\n", lem_in->all_paths->data);
+	pop_off_bottom_queue(queue, 0);
 }

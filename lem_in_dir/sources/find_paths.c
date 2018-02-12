@@ -6,7 +6,7 @@
 /*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 11:01:26 by lramirez          #+#    #+#             */
-/*   Updated: 2018/02/12 12:08:49 by lararamirez      ###   ########.fr       */
+/*   Updated: 2018/02/12 19:29:43 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ char		queue_possible_paths(t_master *lem_in, size_t current_node,
 			current_node = *(size_t *)tunnels->data;
 			(current_path->visited)[current_node] = '1';
 			new_path = (t_path *)ft_memalloc(sizeof(t_path));
+			ft_printf("new_path (%x) created\n", new_path);
 			new_path->itin = add_current_node(current_path, current_node);
 			new_path->visited = fill_visited(new_path, lem_in->room_count);
 			new_path->last_node = current_node;
@@ -85,6 +86,7 @@ void		free_queue(t_stack **queue)
 		tmp = NULL;
 		(*queue)->size--;
 	}
+	free(*queue);
 	*queue = NULL;
 }
 
@@ -101,16 +103,18 @@ int			find_paths(t_master *lem_in, size_t start)
 	(current_path->visited)[current_node] = '1';
 	if (!queue_possible_paths(lem_in, current_node, current_path, queue))
 	{
+		free_path(&current_path);
 		free_queue(&queue);
 		return (0);
 	}
+	free_path(&current_path);
 	while (queue->size)
 	{
 		current_node = queue->bottom->last_node;
 		if (!(current_node == lem_in->end_index))
 		{
 			queue_possible_paths(lem_in, current_node, queue->bottom, queue);
-			pop_off_bottom_queue(queue);
+			pop_off_bottom_queue(queue, 1);
 		}
 		else
 			move_to_path_lst(lem_in, queue);

@@ -6,7 +6,7 @@
 /*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/22 12:21:19 by lararamirez       #+#    #+#             */
-/*   Updated: 2018/02/12 11:28:55 by lararamirez      ###   ########.fr       */
+/*   Updated: 2018/02/12 18:48:14 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ void			init_queue(t_path *new_path);
 ** Functions in paths_util.c
 */
 void			free_path(t_path **path);
-void			pop_off_bottom_queue(t_stack *queue);
+void			pop_off_bottom_queue(t_stack *queue, char to_free);
 void			pile_onto_stack(t_path *path, t_stack *queue);
 t_room			*add_path(t_master *lem_in);
 void			move_to_path_lst(t_master *lem_in, t_stack *queue);

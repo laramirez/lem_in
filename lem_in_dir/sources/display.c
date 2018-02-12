@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 18:33:24 by lramirez          #+#    #+#             */
-/*   Updated: 2018/02/10 18:09:47 by lramirez         ###   ########.fr       */
+/*   Updated: 2018/02/12 18:28:12 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ void		display_tunnels(t_master *lem_in)
 			while (tmp->next)
 			{
 				printf(" \033[0;36m[%s]", lem_in->rooms[*(size_t *)tmp->data]);
-				printf("\033[0m &\033[0;36m");
+				printf("\033[0m &");
 				tmp = tmp->next;
 			}
-			printf(" [%s]\033[0m\n\n", lem_in->rooms[*(size_t *)tmp->data]);
+			printf(" \033[0;36m[%s]\033[0m\n\n", lem_in->rooms[*(size_t *)tmp->data]);
 		}
 		i++;
 	}

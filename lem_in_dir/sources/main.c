@@ -6,7 +6,7 @@
 /*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 12:10:54 by lararamirez       #+#    #+#             */
-/*   Updated: 2018/02/12 12:17:34 by lararamirez      ###   ########.fr       */
+/*   Updated: 2018/02/12 19:37:02 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,15 @@ void		free_paths(t_master *lem_in)
 	
 	while (lem_in->all_paths)
 	{
+		ft_printf("complete path (%x) freed\n", (t_path *)lem_in->all_paths->data);
 		tmp = lem_in->all_paths;
 		lem_in->all_paths = lem_in->all_paths->next;
 		free_path((t_path **)&tmp->data);
-		tmp->data = NULL;
 		free(tmp);
 		tmp = NULL;
 	}
 	free(lem_in->all_paths);
+	lem_in->all_paths = NULL;
 }
 
 void		initialize_main(t_master *lem_in, t_list **lst, char **line)
