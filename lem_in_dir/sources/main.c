@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
+/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 12:10:54 by lararamirez       #+#    #+#             */
-/*   Updated: 2018/02/13 11:48:14 by lararamirez      ###   ########.fr       */
+/*   Updated: 2018/02/13 15:14:15 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,14 +116,23 @@ int			main(int argc, char **argv)
 	t_list		*lst;
 	t_list		*ptr;
 	char		*line;
+	char		start;
+	int			ret;
 
+	start = 1;
 	initialize_main(&lem_in, &lst, &line);
 	if (argc > 2)
 		print_usage_and_kill(0);
 	else if (argc == 2 && !get_option(argv[1], &lem_in))
 		print_usage_and_kill(1);
-	while (get_next_line(0, &line))
+	while ((ret = get_next_line(0, &line)))
 	{
+		if (start)
+		{
+			if (ret == -1)
+				print_process_error_and_kill(0);
+			start = 0;
+		}
 		ft_lstaddend(&lst, ft_lstnew(line, ft_strlen(line) + 1));
 		ft_strdel(&line);
 	}
@@ -144,7 +153,7 @@ int			main(int argc, char **argv)
 	if (!find_paths(&lem_in, lem_in.start_index))
 	{
 		free_list(&lst);
-		free_paths(&lem_in);
+			free_paths(&lem_in);
 		free_rooms(&lem_in);
 		print_process_error_and_kill(0);
 	}

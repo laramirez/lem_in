@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
+/*   By: lramirez <lramirez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 18:07:11 by lramirez          #+#    #+#             */
-/*   Updated: 2018/02/13 11:48:14 by lararamirez      ###   ########.fr       */
+/*   Updated: 2018/02/13 14:47:00 by lramirez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,11 @@ t_room		*add_path(t_master *lem_in)
 
 void		move_to_path_lst(t_master *lem_in, t_stack *queue)
 {
+	t_path *tmp;
+	
+	tmp = queue->bottom;
 	ft_lstaddend(&lem_in->all_paths, ft_lstnew(queue->bottom, sizeof(t_path)));
-	pop_off_bottom_queue(queue, 1);
+	pop_off_bottom_queue(queue, 0);
+	free(tmp);
+	tmp = NULL;
 }
