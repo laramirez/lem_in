@@ -6,7 +6,7 @@
 /*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/08 18:29:40 by lramirez          #+#    #+#             */
-/*   Updated: 2018/02/12 19:45:01 by lararamirez      ###   ########.fr       */
+/*   Updated: 2018/02/13 11:01:52 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ t_list		*ft_lstnew(void const *data, size_t data_size)
 {
 	t_list	*newlist;
 
-	ft_printf("data (%x) created\n", data);
 	newlist = (t_list *)ft_memalloc(sizeof(t_list));
 	if (!data)
 	{

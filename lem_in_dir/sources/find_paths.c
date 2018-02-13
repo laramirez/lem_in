@@ -6,7 +6,7 @@
 /*   By: lararamirez <lararamirez@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 11:01:26 by lramirez          #+#    #+#             */
-/*   Updated: 2018/02/12 19:29:43 by lararamirez      ###   ########.fr       */
+/*   Updated: 2018/02/13 10:58:53 by lararamirez      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ char		queue_possible_paths(t_master *lem_in, size_t current_node,
 			current_node = *(size_t *)tunnels->data;
 			(current_path->visited)[current_node] = '1';
 			new_path = (t_path *)ft_memalloc(sizeof(t_path));
-			ft_printf("new_path (%x) created\n", new_path);
 			new_path->itin = add_current_node(current_path, current_node);
 			new_path->visited = fill_visited(new_path, lem_in->room_count);
 			new_path->last_node = current_node;
